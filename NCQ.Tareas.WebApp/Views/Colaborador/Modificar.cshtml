@@ -1,0 +1,29 @@
+﻿@model NCQ.Tareas.WebApp.Models.Colaborador
+@{
+    ViewData["Title"] = "Colaboradores - Modificar";
+}
+
+
+
+<h1>Modificar Colaboradores</h1>
+
+<div>
+    <p>@ViewBag.Message</p>
+</div>
+
+<div class="row">
+    <form asp-action="Modificar">
+        <input type="hidden" asp-for="Id">
+        <div class="form-group">
+            <label asp-for="NombreCompleto" class="control-label"></label>
+            <input asp-for="NombreCompleto" class="form-control" />
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-sm btn-success">
+            <a asp-action="Index" class="btn btn-sm btn-secondary">Regresar</a>
+        </div>
+    </form>
+</div>

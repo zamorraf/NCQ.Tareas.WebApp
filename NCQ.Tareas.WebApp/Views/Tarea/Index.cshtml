@@ -1,0 +1,99 @@
+﻿@model IEnumerable<NCQ.Tareas.WebApp.Models.ViewModels.TareaVM>
+@{
+    ViewData["Title"] = "Tareas - Listado";
+}
+
+<h1>Tareas - Listado</h1>
+
+<div>
+    <p>@ViewBag.Mensaje</p>
+</div>
+
+<a asp-action="Crear" class="btn btn-sm btn-primary">
+    <span class="bi bi-plus-lg"></span> Crear
+</a>
+<hr />
+<div class="">
+    <form asp-action="Index" method="get">
+        <div class="">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="inputColaborador" class="col-form-label col-form-label-sm">Colaborador</label>
+                    <!-- Colaborador -->
+                    <select name="FiltroColaborador" asp-items="@ViewBag.ColaboradorId" class="form-control form-control-sm">
+                        <option value="0">Todos</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputEstado" class="col-form-label col-form-label-sm">Estado</label>
+                    <!-- Estado -->
+                    <select name="FiltroEstado" asp-items="@ViewBag.Estado" class="form-control form-control-sm">
+                        <option value="0">Todos</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="inputEstado" class="col-form-label col-form-label-sm">Prioridad</label>
+                    <!-- Prioridad -->
+                    <select name="FiltroPrioridad" asp-items="@ViewBag.Prioridad" class="form-control form-control-sm">
+                        <option value="0">Todos</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputEstado" class="col-form-label col-form-label-sm">Fecha Inicio</label>
+                    <!-- Fecha Inicio -->
+                    <input name="FiltroFechaInicio" value="@ViewData["filtroFechaInicio"]" type="date" class="form-control form-control-sm" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputEstado" class="col-form-label col-form-label-sm">Fecha Fin</label>
+                    <!-- Fecha Fin -->
+                    <input name="FiltroFechaFin" value="@ViewData["filtroFechaFin"]" type="date" class="form-control form-control-sm" />
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="inputEstado" class="col-form-label col-form-label-sm" style="color:transparent">.</label>
+                    <input type="submit" value="Filtrar" class="form-control form-control-sm btn btn-sm btn-secondary">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                <th>@Html.DisplayNameFor(model => model.ColaboradorNombre)</th>
+                <th>@Html.DisplayNameFor(model => model.EstadoDesc)</th>
+                <th>@Html.DisplayNameFor(model => model.PrioridadDesc)</th>
+                <th>@Html.DisplayNameFor(model => model.FechaInicio)</th>
+                <th>@Html.DisplayNameFor(model => model.FechaFin)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tarea in @Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => tarea.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => tarea.ColaboradorNombre)</td>
+                    <td>@Html.DisplayFor(modelItem => tarea.EstadoDesc)</td>
+                    <td>@Html.DisplayFor(modelItem => tarea.PrioridadDesc)</td>
+                    <td>@Html.DisplayFor(modelItem => tarea.FechaInicio)</td>
+                    <td>@Html.DisplayFor(modelItem => tarea.FechaFin)</td>
+                    <td>
+                        <div>
+                            <a asp-action="Modificar" asp-route-id="@tarea.Id" title="Modificar" class="btn btn-sm btn-warning">
+                                <span class="bi bi-pencil"></span>
+                            </a>
+                            <a asp-action="Eliminar" asp-route-id="@tarea.Id"  title="Eliminar" class="btn btn-sm btn-danger">
+                                <span class="bi bi-trash"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
